@@ -1,0 +1,20 @@
+{
+    "name": "fmujie/baiduface",
+    "description": "Face recognition API integrated with Baidu AI open platform",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "fmujie",
+            "email": "fmujie182@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fmujie\\BaiduFace\\": "src/"
+        }
+    }
+
+}
