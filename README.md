@@ -1,4 +1,4 @@
-现仅有百度AI平台的人脸UID搜索功能（基于已创建人脸库）
+包含百度AI平台的人脸UID搜索功能、人脸注册、人脸删除（基于已创建人脸库）
 
 ## 安装
 
@@ -112,39 +112,77 @@
     }
     ~~~
     
+    #### 调用成功返回示例
 
-#### 调用成功返回示例
+	~~~json
+	{
+    	"code": 1,
+    	"status": "success",
+    	"msg": "人脸Uid搜索成功",
+    	"score": 96.488388061523,
+    	"face_token": "xxx"
+	}
+	{
+    	"code": 0,
+    	"status": "error",
+    	"msg": "人脸Uid搜索失败误,错误码:222202,错误详情信息:pic not has face",
+    	"score": null,
+    	"face_token": null
+	}
+	{
+    	"code": 1,
+    	"status": "success",
+    	"msg": "人脸Uid搜索成功",
+    	"score": 96.488388061523,
+    	"face_token": "XXX"
+	}
+	{
+    	"code": 1,
+    	"status": "success",
+    	"msg": "人脸Uid搜索成功",
+    	"score": 96.488388061523,
+    	"face_token": "xxx"
+	}
+	~~~
+	
+2. 人脸注册（仅列出必须）
 
-~~~json
-{
-    "code": 1,
-    "status": "success",
-    "msg": "人脸Uid搜索成功",
-    "score": 96.488388061523,
-    "face_token": "xxx"
-}
-{
-    "code": 0,
-    "status": "error",
-    "msg": "人脸Uid搜索失败误,错误码:222202,错误详情信息:pic not has face",
-    "score": null,
-    "face_token": null
-}
-{
-    "code": 1,
-    "status": "success",
-    "msg": "人脸Uid搜索成功",
-    "score": 96.488388061523,
-    "face_token": "XXX"
-}
-{
-    "code": 1,
-    "status": "success",
-    "msg": "人脸Uid搜索成功",
-    "score": 96.488388061523,
-    "face_token": "xxx"
-}
-~~~
+     ~~~php
+     Fmujie\BaiduFace\BaiduFaceApi::BaiduFaceApi::faceRegistration($image, 'test', '181116', 'BASE64', false, 'APPEND');
+     ~~~
+     默认参数
+
+     ~~~php
+     faceRegistration($image, $groupId = null, $userId = null, $imageType = 'BASE64', $imgIsBase64 = false, $action_type = 'APPEND', $user_info = '', $quality_control = 'NONE', $liveness_control = 'NONE')
+     ~~~
+
+     接口字段：
+
+     | 参数  | 类型  | 说明  | 可为空  |
+     | ------------ | ------------ | ------------ | ------------ |
+     | image | Mixed | 取决于image_type参数，传入BASE64字符串或URL字符串或FACE_TOKEN字符串 | N |
+     | groupId | String | 用户组id（由数字、字母、下划线组成），长度限制128B | N |
+     | userId | String | 用户id（由数字、字母、下划线组成），长度限制128B | N |
+     | imageType | String | 决定传入的$image以什么种类 | Y |
+     | imgIsBase64 | Bool | 根据需求指定传入的是图像二进制流OR"BASE64"编码后的字符串 | Y |
+     | action_type | String | *操作方式 APPEND: 当user_id在库中已经存在时，对此user_id重复注册时，新注册的图片默认会追加到该user_id下,REPLACE : 当对此user_id重复注册时,则会用新图替换库中该user_id下所有图片,默认使用APPEND* | Y |
+     | user_info | String | 用户资料，长度限制256B | Y |
+     | quality_control | String | 图片质量控制 NONE: 不进行控制 LOW:较低的质量要求 NORMAL: 一般的质量要求 HIGH: 较高的质量要求 默认 NONE | Y |
+     | liveness_control | String | 活体检测控制 NONE: 不进行控制 LOW:较低的活体要求(高通过率 低攻击拒绝率) NORMAL: 一般的活体要求(平衡的攻击拒绝率, 通过率) HIGH: 较高的活体要求(高攻击拒绝率 低通过率) 默认NONE | Y |
+
+3. 人脸删除
+
+     ~~~php
+     Fmujie\BaiduFace\BaiduFaceApi::BaiduFaceApi::faceDelete($userId, $groupId, $faceToken);
+     ~~~
+	接口字段：
+
+     | 参数  | 类型  | 说明  | 可为空  |
+     | ------------ | ------------ | ------------ | ------------ |
+     | userId | String | *用户id（由数字、字母、下划线组成），长度限制128B* | N |
+     | groupId | String | 用户组id（由数字、字母、下划线组成），长度限制128B | N |
+     | face_token | String | 需要删除的人脸图片token，（由数字、字母、下划线组成）长度限制64B | N |
+     
 
 ## License
 

@@ -118,8 +118,8 @@ class BaiduFaceApi{
      * 人脸注册
      *
      * @param $image BASE64/URL/FACE_TOKEN 要搜索进行对比的人脸图像，取决于image_type参数，传入BASE64字符串或URL字符串或FACE_TOKEN字符串
-     * @param $groupId string 从指定的group中进行查找 用逗号分隔，上限20个
-     * @param $user_id string 要进行对比人脸的唯一标识Uid
+     * @param $groupId string 用户组id（由数字、字母、下划线组成），长度限制128B
+     * @param $userId string 用户id（由数字、字母、下划线组成），长度限制128B
      * @param $imageType string 决定传入的$image以什么种类
      * @param $imgIsBase64 bool 根据需求指定传入的是图像二进制流OR"BASE64"编码后的字符串
      * @param $action_type string 操作方式 APPEND: 当user_id在库中已经存在时，对此user_id重复注册时，新注册的图片默认会追加到该user_id下,REPLACE : 当对此user_id重复注册时,则会用新图替换库中该user_id下所有图片,默认使用APPEND
